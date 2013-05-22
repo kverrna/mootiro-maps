@@ -100,3 +100,31 @@ class FormUser(AjaxModelForm):
         finally:
             return self.cleaned_data
 
+
+
+
+
+
+
+
+
+
+
+#Recovery
+class FormRecovery(AjaxModelForm):
+    '''Simplified use form with the minimun required info.'''
+
+    class Meta:
+        model = User
+        fields = ( 'email')
+
+    _field_labels = {
+	'email': _('Email')
+   }
+
+    
+    email = forms.CharField(required=True)
+
+
+    
+

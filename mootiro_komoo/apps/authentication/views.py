@@ -309,6 +309,12 @@ def explanations(request):
     name = request.GET.get('name', request.user.name)
     return {'name': name}
 
+# =============================================================================
+
+@render_to('authentication/recovery.html')
+def recovery(request):
+    name = request.GET.get('name', request.user.name)
+    return {'name': name}
 
 # =============================================================================
 

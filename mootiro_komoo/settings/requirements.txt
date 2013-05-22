@@ -41,7 +41,7 @@ oauth2client==1.0
 paramiko==1.10.0
 pika==0.9.5
 polib==0.7.0
-psycopg2==2.4.4
+psycopg2==2.4.1
 pycrypto==2.5
 pyes==0.19.1
 pymongo==2.4.1
