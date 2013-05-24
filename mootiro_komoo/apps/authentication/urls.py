@@ -16,7 +16,7 @@ urlpatterns = patterns('authentication.views',
             name='user_verification'),
 
     # recovery password urls
-    url(r'^recovery/?$', 'recovery', name='user_recovery'),
+    url(r'^recovery/?$', 'user_recovery', name='user_recovery'),
     
     # per user urls
     url(r'^(?P<id>\d+)/?$', 'profile', name='user_view'),

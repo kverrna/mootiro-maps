@@ -264,6 +264,29 @@ def user_new(request):
     return {'on_get': on_get, 'on_after_save': on_after_save}
 
 
+@ajax_form('authentication/recovery.html', FormRecovery)
+def recovery(request):
+    '''Displays user password recovery form.'''
+
+    def on_get(request, form):
+        form.helper.form_action = reverse('user_new')
+        return form
+
+    def on_after_save(request, user):
+        user.is_active = False
+        user.set_password(request.POST['password'])
+
+        user.save()
+
+        user.send_confirmation_mail(request)
+        send_explanations_mail(user)
+
+        redirect_url = reverse('user_check_inbox')
+        return {'redirect': redirect_url}
+
+    return {'on_get': on_get, 'on_after_save': on_after_save}
+
+
 @render_to('authentication/login.html')
 def login(request):
     '''
@@ -311,10 +334,8 @@ def explanations(request):
 
 # =============================================================================
 
-@render_to('authentication/recovery.html')
-def recovery(request):
-    name = request.GET.get('name', request.user.name)
-    return {'name': name}
+
+
 
 # =============================================================================
 

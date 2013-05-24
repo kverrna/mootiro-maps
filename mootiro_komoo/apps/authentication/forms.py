@@ -101,30 +101,20 @@ class FormUser(AjaxModelForm):
             return self.cleaned_data
 
 
-
-
-
-
-
-
-
-
-
 #Recovery
 class FormRecovery(AjaxModelForm):
-    '''Simplified use form with the minimun required info.'''
+	'''Simplified use form with the minimun required info.'''
 
-    class Meta:
-        model = User
-        fields = ( 'email')
+	class Meta:
+		model = User
+		fields = ('email')
 
-    _field_labels = {
-	'email': _('Email')
-   }
-
+	_field_labels = {
+		'email': _('Email'),
+	}
     
-    email = forms.CharField(required=True)
+	email = forms.CharField(required=True)
 
-
-    
-
+ 	def __init__(self, *a, **kw):
+	 	self.helper = MooHelper(form_id="form_recovery")
+	        return super(FormUser, self).__init__(*a, **kw)
