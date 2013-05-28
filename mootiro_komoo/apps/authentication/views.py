@@ -23,7 +23,7 @@ from update.models import Update
 from locker.models import Locker
 
 from .models import User
-from .forms import FormProfile, FormUser
+from .forms import FormProfile, FormUser,FormRecovery
 from .utils import login_required
 from .utils import logout as auth_logout
 from .utils import login as auth_login
@@ -359,4 +359,27 @@ def user_verification(request, key=''):
 #                     'user': user_data
 #                 }
 #             }
+
+#==========REcovery=============
+@ajax_form('authentication/recovery.html', FormRecovery)
+def recovery(request):
+    '''Displays user creation form.'''
+
+    def on_get(request, form):
+        FormRecovery.helper.form_action = reverse('user_recovery')
+        return FormRecovery
+
+    def on_after_save(request, user):
+        user.is_active = False
+        user.set_password(request.POST['password'])
+
+        user.save()
+
+        user.send_confirmation_mail(request)
+        send_explanations_mail(user)
+
+        redirect_url = reverse('user_check_inbox')
+        return {'redirect': redirect_url}
+
+    return {'on_get': on_get, 'on_after_save': on_after_save}
 

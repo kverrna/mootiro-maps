@@ -100,3 +100,29 @@ class FormUser(AjaxModelForm):
         finally:
             return self.cleaned_data
 
+#================formRecovery=============
+class FormRecovery(AjaxModelForm):
+    '''Simplified use form with the minimun required info.'''
+#
+    class Meta:
+        model = User
+        fields = ('name', 'email', 'password')
+
+    _field_labels = {
+        'name': _('Name[apagar]'),
+        'email': _('E-mail[apagar]'),
+        'password': _('Password'),
+        'password_confirmation': _('Confirm your Password'),
+    }
+#definindo os atributos basicos do formHelper
+    name = forms.CharField(required=True)
+    email = forms.CharField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput(
+                attrs={'autocomplete': 'off'}))
+    password_confirmation = forms.CharField(required=True,
+                widget=forms.PasswordInput(attrs={'autocomplete': 'off'}))
+
+    def __init__(self, *a, **kw):
+        self.helper = MooHelper(form_id="form_recovery")
+        return super(FormRecovery, self).__init__(*a, **kw)
+
