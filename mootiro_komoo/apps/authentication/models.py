@@ -172,7 +172,7 @@ class User(GeoRefModel, BaseModel):
                 valid, self.errors[field] = False, _('Required field')
 
         if not self.id:
-            # new User
+            # new User 
             if SocialAuth.objects.filter(email=self.email).exists():
                 valid = False
                 self.errors['email'] = _('This email is registered on our '

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python 
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf.urls.defaults import url, patterns

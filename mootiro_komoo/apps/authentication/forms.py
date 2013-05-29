@@ -74,7 +74,7 @@ class FormUser(AjaxModelForm):
         return super(FormUser, self).__init__(*a, **kw)
 
     def clean(self):
-        """Form validations."""
+        """Form validations.""" 
         super(FormUser, self).clean()
         try:
             email = self.cleaned_data['email']
