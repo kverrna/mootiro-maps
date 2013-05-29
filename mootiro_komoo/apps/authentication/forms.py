@@ -107,10 +107,12 @@ class FormRecovery(AjaxModelForm):
 
 	class Meta:
 		model = User
-		fields = ('email')
+		fields = ('name', 'email', 'password')
 
 	_field_labels = {
-		'email': _('Email'),
+                'email': _('Email'),
+                'password': _('Password'),
+                'password_confirmation': _('Confirm your Password'),
 	}
     
 	email = forms.CharField(required=True)
@@ -118,3 +120,7 @@ class FormRecovery(AjaxModelForm):
  	def __init__(self, *a, **kw):
 	 	self.helper = MooHelper(form_id="form_recovery")
 	        return super(FormUser, self).__init__(*a, **kw)
+
+
+
+
