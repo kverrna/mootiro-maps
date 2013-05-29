@@ -107,20 +107,27 @@ class FormRecovery(AjaxModelForm):
 
 	class Meta:
 		model = User
-		fields = ('name', 'email', 'password')
+		fields = ['email']
 
-	_field_labels = {
-                'email': _('Email'),
-                'password': _('Password'),
-                'password_confirmation': _('Confirm your Password'),
-	}
-    
+	_field_labels = {		
+                'email': _('Email'),                              
+	}    
+	
 	email = forms.CharField(required=True)
 
  	def __init__(self, *a, **kw):
 	 	self.helper = MooHelper(form_id="form_recovery")
-	        return super(FormUser, self).__init__(*a, **kw)
+	        return super(FormRecovery, self).__init__(*a, **kw)
 
 
+	def clean(self):
+        	"""Form validations.""" 
+        	super(FormUser, self).clean()
+        try:
+            	email = self.cleaned_data['email']
+            	if email:
+               		email = email.lower()
+                	self.cleaned_data['email'] = email
 
-
+	except Exception as err:
+            logger.error('Validation Error: {}'.format(err))

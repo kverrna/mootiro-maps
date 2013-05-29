@@ -5,13 +5,14 @@
 {% block content %}
   <div id="main-content">
     <div class="main-column">
-      <div class='form-legend'>{% trans 'New User' %}</div>
+      <div class='form-legend'>{% trans 'User Recovery' %}</div>
       <div class='alert alert-info required-notice' data-alert='info'>
           <div class='msg'>
               O campo com asterisco (<strong>*</strong>) é obrigatório!
           </div>
       </div>
-     
+     {% crispy form form.helper %}
+
     </div>
   </div>
 {% endblock %}
@@ -19,7 +20,7 @@
 {% block page_scripts %}
     <script type="text/javascript">
       $(function(){
-        $('#form_user').ajaxform();
+        $('#form_recovery').ajaxform();
       });
     </script>
 {% endblock %}
